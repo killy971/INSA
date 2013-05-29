@@ -1,0 +1,133 @@
+(* TP 10 - Les arbres n-aires *)
+
+type 'a arbre = Feuille of 'a | Noeud of 'a * 'a arbre list;;
+
+let arbre1 = Noeud(5,[Noeud(3,[Feuille 4;Noeud(7,[Feuille 10;Feuille 12;Feuille 13]);Feuille 20]);Feuille 21]);;
+let arbre2 = Noeud (7, [Feuille 1; Feuille 2; Feuille 0; Feuille 14; Feuille 15]);;
+let arbre3 = Noeud(5,[Noeud(3,[Feuille 4;Noeud(7,[Feuille 10;Feuille 12;Feuille 13]);Feuille 20]);Feuille 21]);;
+
+(* Compte le nombre de feuilles d'un arbre *)
+
+let rec compter = function
+	Feuille _ -> 1
+|	Noeud (_,[]) -> 0
+|	Noeud (_,l) -> List.fold_left (+) 0 (List.map compter l);;
+
+(*
+# compter arbre1;;
+- : int = 6
+*)
+				
+let rec compter = function
+	Feuille _ -> 1
+|	Noeud (_,[]) -> 0
+|	Noeud (_,l) -> List.fold_left
+					(fun x -> fun y -> x + (compter y))
+					0
+					l;;
+
+(* Determine la longueur de la plus haute branche d'un arbre (hauteur de l'arbre) *)
+
+let rec plushaute = function
+	Feuille _ -> 0
+|	Noeud (_,[]) -> 0
+|	Noeud (_,l) -> 1 + List.fold_left
+					(fun x -> fun y -> max x (plushaute y))
+					0
+					l;;
+
+(*
+# plushaute arbre1;;
+- : int = 3
+*)
+
+let rec plushaute = function
+	Feuille _ -> 0
+|	Noeud (_,[]) -> 0
+|	Noeud (_,l) -> 1 + List.fold_left
+					(fun x -> fun y -> max x y)
+					0
+					(List.map plushaute l);;
+
+(* Retourne la liste des sous arbre d'un arbre *)
+
+let rec listsa = function
+	Feuille f -> [Feuille f]
+|	Noeud (v,l) -> List.fold_left (@) [Noeud (v,l)] (List.map listsa l);; 
+
+
+(* Retourne la liste des branches d'un arbre *)
+
+(* la fonction listbr_aux prend en 1er arg la liste des valeurs de noeud parentes, et en 2ème argument l'arbre fils *)
+
+let listbr a =
+	let rec listbr_aux l = function
+		Feuille f -> [l@[f]]
+	|	Noeud (v,n) -> List.fold_left (@) [] (List.map (listbr_aux (l@[v])) n)
+in listbr_aux [] a;;
+
+(*
+# listsa arbre1;;
+- : int arbre list =
+[Noeud (5,
+  [Noeud (3,
+    [Feuille 4; Noeud (7, [Feuille 10; Feuille 12; Feuille 13]); Feuille 20]);
+   Feuille 21]);
+ Noeud (3,
+  [Feuille 4; Noeud (7, [Feuille 10; Feuille 12; Feuille 13]); Feuille 20 ]);
+ Feuille 4;
+ Noeud (7, [Feuille 10; Feuille 12; Feuille 13]);
+ Feuille 10;
+ Feuille 12;
+ Feuille 13;
+ Feuille 20;
+ Feuille 21]
+*)
+
+(* Teste l'égalité de 2 arbres *)
+
+let rec egal a1 a2 = match (a1,a2) with
+	(Feuille f1,Feuille f2) when f1=f2 -> true
+|	(Noeud (v1,l1),Noeud (v2,l2)) when v1=v2 ->
+		List.fold_left
+		(&)
+		true
+		(List.map (fun (x,y) -> egal x y) (List.combine l1 l2))
+|	(_,_) -> false;;
+
+(*
+# egal arbre1 arbre3;;
+- : bool = true
+# egal arbre1 arbre2;;
+- : bool = false
+*)
+
+let egal = (=);;
+
+(* Remplace a1 par a2 dans a *)
+
+let rec remplace a1 a2 a = match a with
+	Feuille f -> if (egal a1 (Feuille f)) then a2 else Feuille f
+|	Noeud (v,l) -> if (egal a1 (Noeud (v,l))) then a2 else Noeud (v,(List.map (remplace a1 a2) l));;
+
+(*
+let ar0 = Feuille 12;;
+let ar1 = Noeud(7,[Feuille 10;Feuille 12;Feuille 13]);;
+let ar2 = Noeud(10,[Feuille 13;Feuille 15;Feuille 16]);;
+let ar3 = Noeud(5,[Noeud(3,[Feuille 4;Noeud(7,[Feuille 10;Feuille 12;Feuille 13]);Feuille 20]);Feuille 21]);;
+
+# egal ar3 (remplace ar1 ar2 ar3);;
+- : bool = false
+# egal ar3 (remplace ar2 ar1 ar3);;
+- : bool = true
+# remplace ar0 ar2 ar3;;
+- : int arbre =
+Noeud (5,
+ [Noeud (3,
+   [Feuille 4;
+    Noeud (7,
+     [Feuille 10; Noeud (10, [Feuille 13; Feuille 15; Feuille 16]);
+      Feuille 13]);
+    Feuille 20]);
+  Feuille 21])
+*)

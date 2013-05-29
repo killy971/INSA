@@ -1,0 +1,6 @@
+[eclipse 38]: inferieur(carte(as,pique),carte(trois,pique)).
+
+No (0.00s cpu)
+[eclipse 39]: inferieur(carte(trois,pique),carte(as,pique)).
+
+Yes (0.00s cpu, solution 1, maybe more) ?

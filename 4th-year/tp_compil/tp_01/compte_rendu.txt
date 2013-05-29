@@ -1,0 +1,93 @@
+Guillaume Nargeot
+Angelique Lainé
+4 INFO
+Compte rendu TP1
+Analyse lexicale et crible
+
+
+Le diagramme de transition:
+
+
+
+
+
+
+
+
+
+
+
+
+Explication du code:
+
+fonction fct_transition: la fonction de transition de l'automate
+2 paramètres en entrée: l'état courant et le nouveau caractère
+retourne le nouvel état
+Fonction qui représente l'automate et qui indique le nouvel état en fonction de l'état courant et du  nouveau caractère.
+
+fonction get_token: représente le scanner incrémental qui rend un lexème à la demande  
+2 paramètres en entrée: la description de l'automate (représenté par l'état de départ, la fonction de transition et la liste des états finaux) et le flot à analyser.
+retourne un couple (unité lexicale, lexème) à la fois.
+Cette fonction fait appel à la fonction get_token_aux.
+
+fonction get_token_aux:
+3 paramètres en entrée: la description de l'automate, (représenté par l'état de départ, la fonction de transition et la liste des états finaux), le lexème que l'on construit et le flot à analyser.
+retourne le lexème détecté
+Algorithme de la fonction:
+On prend le caractère courant du flot
+Si on est pas à la fin du flot
+alors
+	on fait appel à la fonction de transition.
+	si la fonction de transition retourne l'etat final E3
+	alors
+		(* le dernier caractère lu ne doit pas être consommé*)
+		on retourne le lexème trouvé
+	sinon
+		si la fonction de transition retourne l'état initial
+		alors			
+			(* cas ou on a lu des commentaires, un espace, une tabulation ou 	un retour à 			la ligne*)
+			on consomme le caractère lu.
+			on relance la recherche d'un lexème sans tenir compte du 						commentaire ou espace ou tabulation ou retour à la ligne trouvé.
+		sinon
+			si la fonction de transition retourne l'état final E8
+			alors
+				(* le dernier caractère lu doit être consommé*)
+				on consomme le caractère lu.			
+				on retourne le lexème trouvé.
+			sinon
+				on continue récursivement la recherche du lexème.
+sinon
+	(* on est à la fin du flot *)
+	on retourne le lexème trouvé.
+
+La valeur unite_lex: correspond au résultat du crible: on compare le lexème trouvé avec les chaînes connues pour retourner le couple (unité lexicale, lexème).
+
+fonction scanner: le scanner qui rend la liste des lexèmes du programme
+2 paramètres en entrée: la description de l'automate (représenté par l'état de départ, la fonction de transition et la liste des états finaux) et le flot à analyser.
+retourne la liste des couples (unit_lexicale, lexème).
+
+
+Questions:
+
+1) Quel est l'intérêt d'avoir un crible séparé dans l'analyseur lexical?
+
+Séparer le crible dans l'analyseur lexical permet d'avoir un analyseur lexical plus générique.
+La sous-fonction crible (unit_lex) pourra être changée ou modifiée simplement puisque toutes les unités lexicales sont réunies au sein  de la même sous-fonction. La maintenance de cet analyseur lexical en est donc facilitée.
+
+2)Quels sont les intérêts d'utiliser les types énumérés de CAML?
+
+L'utilisation de types énumérés en CAML permet de précisément définir les types des paramètres utilisés. Cela permet d'être plus explicite dans les valeurs retournées et d'éviter les erreurs de typage. Le code est plus optimisé, plus performant.
+
+3)Quel est l'intérêt d'un scanner incrémental qui rend un lexème à la demande (fonction get_token), par rapport à un scanner qui rend la liste des lexèmes du programme?
+
+L'intérêt de faire un scanner ne rendant qu'un lexème à la fois permet de simplifier l'implémentation de l'analyseur lexical.  Le scanner rendant la liste des unités lexicales est développé en faisant appel autant de fois que nécessaire au scanner incrémental. De plus, la gestion et la récupération des erreurs en sont simplifiées.
+
+4)Pourquoi ident est-il considéré comme un terminal et non pas un non-terminal?
+
+
+
+
+
+
+
+

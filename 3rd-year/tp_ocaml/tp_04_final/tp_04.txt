@@ -1,0 +1,109 @@
+(* TP n°4 - Les listes *)
+(* Guillaume Nargeot *)
+(* Francois Dugast *)
+
+(* 1 : calcule le nombre d'elements de l *)
+
+let rec longueur = function
+  	[] -> 0
+  |	x::r -> 1 + longueur r;;
+
+
+(* 2 : teste si un element appartient a la liste *)
+
+let rec appartient e = function
+  	[] -> false
+  |	x::r -> if (x==e) then true else appartient e r;;
+
+(* 3 : calcule le rang de e dans l si e est dans l, 0 sinon *)
+
+let rang e l =
+  	let rec rang_aux e l n = match l with
+  		[] -> 0
+  	|	x::r -> if (x==e) then n else rang_aux e r (n+1)
+  	in rang_aux e l 1;;
+
+let rec rang_v2 e = function
+		[] -> 0
+	|	x::r when (x==e) -> 1
+	| 	x::r -> if (appartient e (x::r)) then (1+(rang_v2 e r)) else 0;; 
+
+(* 4 : rend une liste constituee des n premiers elements de l*)
+
+let rec debliste l n = match l with
+  	_ when n<0 -> raise (Failure "erreur: n<0")
+  |	[] when n>0 -> raise (Failure "n > longueur l")
+  |	[] when n>=0 -> []
+  |	x::r -> if (n>0) then x::(debliste r (n-1)) else [];;
+
+(* 5 : rend une liste constituee des n derniers elements de l *)
+
+let finliste l n = match l with
+  	[] -> []
+  |	liste when ((longueur liste)-n<=0) -> liste
+  |	x::r -> finliste r ((longueur r)-n);;
+
+(* 6 : remplace toutes les occurrences de x par y dans la liste *)
+
+let rec remplace x y l = match l with
+  	[] -> []
+  |	t::q -> if (t==x) then y::(remplace x y q) else t::(remplace x y q);;
+
+(* 7 : calcule si la liste l commence l1 *)
+
+let rec entete l l1 = match (l,l1) with
+  	([],x) -> true
+  |	(x,[]) -> raise (Failure "longueur l > longueur l1")
+  |	(x1::r1,x2::r2) -> if (x1==x2) then (entete r1 r2) else false;;
+
+(* 8 : calcule si la liste l est une sous-liste de l1 *)
+
+let rec sousliste l l1 = match (l,l1) with
+		([],_) -> true
+	|	(liste,x2::r2) -> if (entete liste (x2::r2))
+				then true else (sousliste liste r2)
+	|	_ -> false;;
+
+(* 9 : ote de l1 la liste l si l commence l1, rend l1 sinon *)
+
+let oter l l1 =
+	let rec oter_aux l l1 = match (l,l1) with
+  		([],[]) -> []
+  	|	([],liste) -> liste
+  	|	(x1::r1,x2::r2) -> oter_aux r1 r2
+	in if (entete l l1) then (oter_aux l l1) else l1;;
+
+
+let oter_v2 l l1 = if (entete l l1)
+		then finliste l1 ((longueur l1)-(longueur l))
+		else l1;;
+
+(* 10 : remplace les occurences disjointes de l1 dans l par l2 *)
+
+let rec remplacel l1 l2 l = match (l1,l2,l) with
+		(_,_,[]) -> []
+	|	(liste1,liste2,x::r) -> if (entete liste1 (x::r))
+				then liste2@(remplacel liste1
+							liste2
+							(finliste (x::r)
+								((longueur (x::r))
+								-
+								(longueur liste1))
+							)
+						)
+				else x::(remplacel liste1 liste2 r);;
+
+(* 11 : supprime les occurences disjointes de l1 dans l *)
+
+let rec supprimel l1 l = match (l1,l) with
+		(_,[]) -> []
+	|	(liste,x::r) -> if (entete liste (x::r))
+				then (supprimel liste (finliste (x::r)
+								((longueur (x::r))
+								-
+								(longueur liste))
+							)
+						)
+				else x::(supprimel liste r);;
+
+let supprimel_v2 = function l1 -> function l -> remplacel l1 [] l;;  

@@ -1,0 +1,136 @@
+hauteur(deux).
+hauteur(trois).
+hauteur(quatre).
+hauteur(cinq).
+hauteur(six).
+hauteur(sept).
+hauteur(huit).
+hauteur(neuf).
+hauteur(dix).
+hauteur(valet).
+hauteur(dame).
+hauteur(roi).
+hauteur(as).
+
+couleur(pique).
+couleur(coeur).
+couleur(carreau).
+couleur(trefle).
+
+infh(deux,trois).
+infh(trois,quatre).
+infh(quatre,cinq).
+infh(cinq,six).
+infh(six,sept).
+infh(sept,huit).
+infh(huit,neuf).
+infh(neuf,dix).
+infh(dix,valet).
+infh(valet,dame).
+infh(dame,roi).
+infh(roi,as).
+
+infc(trefle,carreau).
+infc(carreau,coeur).
+infc(coeur,pique).
+
+inferieurc(C1,C2) :- infc(C1,C2).
+inferieurc(C1,C2) :- infc(C1,C3), inferieurc(C3,C2).
+
+inferieurh(H1,H2) :- infh(H1,H2).
+inferieurh(H1,H2) :- infh(H1,H3), inferieurh(H3,H2).
+
+inferieur(carte(H1,C1),carte(H2,C2)) :- inferieurh(H1,H2), \=(H1,H2).
+inferieur(carte(H1,C1),carte(H2,C2)) :- inferieurc(C1,C2), =(H1,H2).
+
+est_carte(carte(H,C)) :- hauteur(H), couleur(C).
+
+
+est_main(main(A,B,C,D,E)) :- est_carte(A),
+                             est_carte(B),
+                             \=(A,B),
+                             est_carte(C),
+                             \=(A,C),
+                             \=(B,C),
+                             est_carte(D),
+                             \=(A,D),
+                             \=(B,D),
+                             \=(C,D),
+                             est_carte(E),
+                             \=(A,E),
+                             \=(B,E),
+                             \=(C,E),
+                             \=(D,E).
+                             
+                             
+                             
+est_main2(main(A,B,C,D,E)) :- est_carte(A),
+                              est_carte(B),
+%                              \=(A,B),
+                              inferieur(A,B),
+                              est_carte(C),
+%                              \=(A,C),
+%                              \=(B,C),
+                              inferieur(B,C),
+                              est_carte(D),
+%                              \=(A,D),
+%                              \=(B,D),
+%                              \=(C,D),
+                              inferieur(C,D),
+                              est_carte(E),
+%                              \=(A,E),
+%                              \=(B,E),
+%                              \=(C,E),
+%                              \=(D,E),
+                              inferieur(D,E).
+                             
+memeh(carte(H1,C1),carte(H2,C2)) :- =(H1,H2).
+diffh(carte(H1,C1),carte(H2,C2)) :- \=(H1,H2).
+
+une_paire(main(C1,C2,C3,C4,C5)) :- memeh(C1,C2), diffh(C2,C3), diffh(C3,C4), diffh(C4,C5).
+une_paire(main(C1,C2,C3,C4,C5)) :- memeh(C2,C3), diffh(C1,C2), diffh(C3,C4), diffh(C4,C5).
+une_paire(main(C1,C2,C3,C4,C5)) :- memeh(C3,C4), diffh(C2,C3), diffh(C1,C2), diffh(C4,C5).
+une_paire(main(C1,C2,C3,C4,C5)) :- memeh(C4,C5), diffh(C2,C3), diffh(C3,C4), diffh(C1,C2).
+
+deux_paires(main(C1,C2,C3,C4,C5)) :- memeh(C1,C2), memeh(C3,C4), diffh(C4,C5), diffh(C2,C3).
+deux_paires(main(C1,C2,C3,C4,C5)) :- memeh(C2,C3), memeh(C4,C5), diffh(C1,C2), diffh(C3,C4).
+deux_paires(main(C1,C2,C3,C4,C5)) :- memeh(C1,C2), memeh(C4,C5), diffh(C2,C3).
+
+brelan(main(C1,C2,C3,C4,C5)) :- memeh(C1,C2),memeh(C2,C3), diffh(C3,C4), diffh(C4,C5).
+brelan(main(C1,C2,C3,C4,C5)) :- memeh(C2,C3),memeh(C3,C4), diffh(C1,C2), diffh(C4,C5).
+brelan(main(C1,C2,C3,C4,C5)) :- memeh(C3,C4),memeh(C4,C5), diffh(C1,C2), diffh(C2,C3).
+
+full(main(C1,C2,C3,C4,C5)) :- memeh(C1,C2),memeh(C2,C3), memeh(C4,C5), diffh(C3,C4).
+full(main(C1,C2,C3,C4,C5)) :- memeh(C3,C4),memeh(C4,C5), memeh(C1,C2), diffh(C2,C3).
+
+carre(main(C1,C2,C3,C4,C5)) :- memeh(C1,C2), memeh(C2,C3), memeh(C3,C4), memeh(C4,C5).
+
+rien(main(C1,C2,C3,C4,C5)) :- diffh(C1,C2), diffh(C2,C3), diffh(C3,C4), diffh(C4,C5).
+
+sup_main(M1,M2) :- carre(M1),full(M2).
+sup_main(M1,M2) :- carre(M1),brelan(M2).
+sup_main(M1,M2) :- carre(M1),deux_paires(M2).
+sup_main(M1,M2) :- carre(M1),une_paire(M2).
+sup_main(M1,M2) :- carre(M1),rien(M2).
+sup_main(M1,M2) :- full(M1),brelan(M2).
+sup_main(M1,M2) :- full(M1),deux_paires(M2).
+sup_main(M1,M2) :- full(M1),une_paire(M2).
+sup_main(M1,M2) :- full(M1),rien(M2).
+sup_main(M1,M2) :- brelan(M1),deux_paires(M2).
+sup_main(M1,M2) :- brelan(M1),une_paire(M2).
+sup_main(M1,M2) :- brelan(M1),rien(M2).
+sup_main(M1,M2) :- deux_paires(M1),une_paire(M2).
+sup_main(M1,M2) :- deux_paires(M1),rien(M2).
+sup_main(M1,M2) :- une_paire(M1),rien(M2).
+ 
+
+
+
+/* mains pour tester */
+m1(main(carte(sept,trefle),carte(valet,coeur),carte(dame,_),carte(_,pique),carte(roi,pique))).			 
+m2(main(carte(sept,trefle),carte(valet,coeur),carte(dame,carreau),carte(_,coeur),carte(roi,pique))).			 
+m3(main(carte(sept,trefle),carte(sept,coeur),carte(dame,_),carte(_,trefle),carte(_,pique))).
+m4(main(carte(sept,trefle),carte(valet,coeur),carte(dame,_),carte(_,pique),carte(_,pique))).	
+m5(main(carte(sept,trefle),carte(valet,coeur),carte(dame,_),carte(_,carreau),carte(dame,pique))).	
+m6(main(carte(sept,carreau),_,carte(valet,_),_,_)).
+m7(main(carte(sept,trefle),carte(sept,coeur),carte(dame,pique),carte(as,trefle),carte(as,pique))).

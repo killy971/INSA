@@ -1,0 +1,165 @@
+
+
+options {
+LOOKAHEAD=1;
+}
+
+PARSER_BEGIN(Gram)
+
+public class Gram
+{
+	public static void main(String args[])
+	{ 
+		Gram parser;
+		java.io.InputStream input;
+
+		if (args.length==1)
+		{
+			System.out.print(args[args.length-1] + ": ");
+			try
+			{
+				input = new java.io.FileInputStream(args[args.length-1]);
+			}
+			catch (java.io.FileNotFoundException e)
+			{
+			System.out.println("Fichier introuvable.");
+				return;
+			}
+		}
+		else if (args.length==0)
+		{
+			System.out.println("Lecture sur l'entree standard...");
+			input = System.in;
+		}
+		else
+		{
+			System.out.println("Usage: java Gram [fichier]");
+			return;
+		}
+		try
+		{
+			parser = new Gram(input);
+			java.util.Date startDate = new java.util.Date();
+			parser.document();
+			java.util.Date endDate = new java.util.Date();
+			long execTime = endDate.getTime() - startDate.getTime();
+			System.out.println("analyse reussie!");
+			if (execTime<1000)
+			{
+				System.out.println("Temps de traitement : "+execTime+" ms");
+			}
+			else
+			{
+				System.out.println("Temps de traitement : "+execTime/1000+" s");
+			}
+		}
+		catch (ParseException e)
+		{
+			String msg = e.getMessage();
+			msg = msg.substring(0,msg.indexOf("\n"));
+			System.out.println("Erreur de syntaxe : "+msg);
+		}
+	}
+}
+
+PARSER_END(Gram)
+
+TOKEN_MGR_DECLS :
+{
+  public static int entierLu;
+  public static String identLu;
+ 
+}
+
+SKIP :
+{
+ 	" "
+  |	"\r"
+  |	"\t"
+  |	"\n"
+}
+
+TOKEN :
+{
+ <DOC : "<doc>">
+| <FINDOC : "</doc>">
+| <TITRE : "<titre>">
+| <FINTITRE : "</titre>">
+| <DATE : "<date>">
+| <FINDATE : "</date>">
+| <PARA : "<para>">
+| <FINPARA : "</para>">
+}
+
+TOKEN :
+{
+    < ENTIER: ( <CHIFFRE> )+ >
+	{entierLu = Integer.parseInt(image.toString());
+        }
+|   < CHIFFRE: ["0" - "9"] >
+|   < IDENT: (<LETTRE>)+ >{identLu =image.toString();}
+|   < LETTRE: ["A"-"Z","a"-"z"] >
+|   < VIRGULE: "," >
+|   < POINT: "." >   
+}
+
+void document() : {}
+	{
+ 		<DOC> { Generation.generationHTML(); }
+ 		titre()
+ 		date()
+ 		paragraphe()
+ 		suitePara()
+ 		<FINDOC> { Generation.generationHTML(); }
+	}
+
+void titre() : {}
+	{
+		<TITRE> { Generation.generationHTML(); }
+		<IDENT> { Generation.generationHTML(); }
+		suiteIdent()
+		<FINTITRE> { Generation.generationHTML(); }
+	}
+
+void date() : {}
+	{
+		<DATE> { Generation.generationHTML(); }
+		<ENTIER> { Generation.generationHTML(); }
+		{ if ((GramTokenManager.entierLu<1900)||
+			(GramTokenManager.entierLu>2002))
+			System.out.println("Erreur de date");
+		}	
+		<FINDATE> { Generation.generationHTML(); }
+	}
+
+void paragraphe() : {}
+	{
+		<PARA> { Generation.generationHTML(); }
+		<IDENT> { Generation.generationHTML(); }
+		ponct()
+		suiteIdentit()
+		suitePara()
+		<FINPARA> { Generation.generationHTML(); }
+	}
+
+void suitePara() : {}
+	{
+		( paragraphe() suitePara() )?
+	}
+
+void suiteIdent() : {}
+	{
+		( <IDENT> { Generation.generationHTML(); } suiteIdent() )?
+	}
+
+void suiteIdentit() : {}
+	{
+		( <IDENT> { Generation.generationHTML(); } ponct() suiteIdentit() )?
+	}
+
+void ponct() : {}
+	{
+		( <VIRGULE> { Generation.generationHTML(); } | <POINT> { Generation.generationHTML(); } )?
+	}
+
+

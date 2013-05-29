@@ -1,0 +1,4 @@
+\select@language {french}
+\contentsline {section}{\numberline {1}Explication du code}{1}
+\contentsline {section}{\numberline {2}Questions}{2}
+\contentsline {section}{\numberline {3}Le diagramme de transition}{3}

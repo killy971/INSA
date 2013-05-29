@@ -1,0 +1,75 @@
+[eclipse 12]: lg([1,2,3],3).
+
+Yes (0.00s cpu)
+
+
+[eclipse 26]: conc3([1,2],[3],[4,5,6],X).
+
+X = [1, 2, 3, 4, 5, 6]
+
+
+[eclipse 43]: miroir([1,2,3],X).
+
+X = [3, 2, 1]
+
+
+[eclipse 49]: palindrome([1,2,1]).
+
+Yes (0.00s cpu, solution 1, maybe more) ?
+[eclipse 50]: palindrome([1,2,3,3,2,1]).
+
+Yes (0.00s cpu, solution 1, maybe more) ?
+
+[eclipse 53]: tousdiff([1,2,3,4]).
+
+Yes (0.00s cpu)
+[eclipse 54]: tousdiff([1,2,2,3]).
+
+No (0.00s cpu)
+
+[eclipse 56]: debpar([1,2,3,4],[1,2]).
+
+Yes (0.00s cpu)
+[eclipse 57]: debpar([1,2,3,4],[2,3]).
+
+No (0.00s cpu)
+
+
+[eclipse 59]: sousliste([1,2,3,4,5],[3,4]).
+
+Yes (0.00s cpu, solution 1, maybe more) ? ;
+
+[eclipse 60]: sousliste([1,2,3,4,5],X).
+
+X = []
+Yes (0.00s cpu, solution 1, maybe more) ? ;
+
+X = [1]
+Yes (0.00s cpu, solution 2, maybe more) ? ;
+
+X = [1, 2]
+Yes (0.00s cpu, solution 3, maybe more) ? ;
+
+X = [1, 2, 3]
+Yes (0.00s cpu, solution 4, maybe more) ? ;
+
+X = [1, 2, 3, 4]
+Yes (0.00s cpu, solution 5, maybe more) ? ;
+
+X = [1, 2, 3, 4, 5]
+Yes (0.00s cpu, solution 6, maybe more) ? ;
+
+X = [1, 2, 3, 4, 5]
+Yes (0.00s cpu, solution 7, maybe more) ? ;
+
+X = [2, 3, 4, 5]
+
+
+
+[eclipse 2]: elim([1,2,4,1,4,5,7,5,2],R).
+
+R = [1, 4, 7, 5, 2]
+Yes (0.00s cpu, solution 1, maybe more) ?
+
+
+

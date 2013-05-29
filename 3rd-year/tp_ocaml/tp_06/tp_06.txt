@@ -1,0 +1,125 @@
+(* TP n‹6 - Reussite *)
+
+(* Definition de la nature des objets *)
+
+type coul = Trefle | Carreau | Coeur | Pique;;
+
+type haut = Sept | Huit | Neuf | Dix | Valet | Dame | Roi | As;;
+
+type carte = Carte of coul * haut;;
+
+
+(* Construction d'un paquet "battu" de 32 cartes *)
+
+let random_carte =
+	let random_carte_aux = function () -> match (Random.int 8) with
+  		0 -> Sept
+  	|	1 -> Huit
+  	|	2 -> Neuf
+  	|	3 -> Dix
+  	|	4 -> Valet
+  	|	5 -> Dame
+  	|	6 -> Roi
+  	|	7 -> As
+	|	_ -> raise (Failure "-_-")
+	in  function () -> match (Random.int 4) with
+  		0 -> Carte (Trefle,random_carte_aux ())
+  	|	1 -> Carte (Carreau,random_carte_aux ())
+  	|	2 -> Carte (Coeur,random_carte_aux ())
+  	|	3 -> Carte (Pique,random_carte_aux ())
+	|	_ -> raise (Failure "-_-");;
+
+let ajtcarte l = (random_carte ())::l;;
+
+ajtcarte (ajtcarte (ajtcarte (ajtcarte (ajtcarte (ajtcarte [])))));;
+
+let faitjeu n =
+	let rec faitjeu_aux n l = match (n,l) with
+  		(i,[]) -> faitjeu_aux (i-1) (ajtcarte [])
+	|	(0,x::r) -> if (List.mem x r) then (faitjeu_aux 0 (ajtcarte r)) else x::r
+	|	(i,x::r) -> if (List.mem x r) then (faitjeu_aux i (ajtcarte r)) else (faitjeu_aux (i-1) (ajtcarte (x::r)))
+	in faitjeu_aux n [];;
+
+faitjeu 32;;
+
+(* On programme une reussite *)
+
+let faitjeupaquets n =
+	let rec faitjeupaquets_aux = function
+  		[] -> []
+  	|	x::r -> [x]::(faitjeupaquets_aux r)
+  	in faitjeupaquets_aux (faitjeu n);;
+
+faitjeupaquets 32;;
+
+let cart_egal c1 c2 = match (c1,c2) with
+		(Carte(Trefle,Sept),Carte(Trefle,Sept)) -> true
+	|	(Carte(Trefle,Huit),Carte(Trefle,Huit)) -> true
+	|	(Carte(Trefle,Neuf),Carte(Trefle,Neuf)) -> true
+	|	(Carte(Trefle,Dix),Carte(Trefle,Dix)) -> true
+	|	(Carte(Trefle,Valet),Carte(Trefle,Valet)) -> true
+	|	(Carte(Trefle,Dame),Carte(Trefle,Dame)) -> true
+	|	(Carte(Trefle,Roi),Carte(Trefle,Roi)) -> true
+	|	(Carte(Trefle,As),Carte(Trefle,As)) -> true
+	|	(Carte(Carreau,Sept),Carte(Carreau,Sept)) -> true
+	|	(Carte(Carreau,Huit),Carte(Carreau,Huit)) -> true
+	|	(Carte(Carreau,Neuf),Carte(Carreau,Neuf)) -> true
+	|	(Carte(Carreau,Dix),Carte(Carreau,Dix)) -> true
+	|	(Carte(Carreau,Valet),Carte(Carreau,Valet)) -> true
+	|	(Carte(Carreau,Dame),Carte(Carreau,Dame)) -> true
+	|	(Carte(Carreau,Roi),Carte(Carreau,Roi)) -> true
+	|	(Carte(Carreau,As),Carte(Carreau,As)) -> true
+	|	(Carte(Coeur,Sept),Carte(Coeur,Sept)) -> true
+	|	(Carte(Coeur,Huit),Carte(Coeur,Huit)) -> true
+	|	(Carte(Coeur,Neuf),Carte(Coeur,Neuf)) -> true
+	|	(Carte(Coeur,Dix),Carte(Coeur,Dix)) -> true
+	|	(Carte(Coeur,Valet),Carte(Coeur,Valet)) -> true
+	|	(Carte(Coeur,Dame),Carte(Coeur,Dame)) -> true
+	|	(Carte(Coeur,Roi),Carte(Coeur,Roi)) -> true
+	|	(Carte(Coeur,As),Carte(Coeur,As)) -> true
+	|	(Carte(Pique,Sept),Carte(Pique,Sept)) -> true
+	|	(Carte(Pique,Huit),Carte(Pique,Huit)) -> true
+	|	(Carte(Pique,Neuf),Carte(Pique,Neuf)) -> true
+	|	(Carte(Pique,Dix),Carte(Pique,Dix)) -> true
+	|	(Carte(Pique,Valet),Carte(Pique,Valet)) -> true
+	|	(Carte(Pique,Dame),Carte(Pique,Dame)) -> true
+	|	(Carte(Pique,Roi),Carte(Pique,Roi)) -> true
+	|	(Carte(Pique,As),Carte(Pique,As)) -> true
+	|	_ -> false;;
+
+let coul_egal c1 c2 = match (c1,c2) with
+		(Carte(Trefle,_),Carte(Trefle,_)) -> true
+	|	(Carte(Carreau,_),Carte(Carreau,_)) -> true
+	|	(Carte(Coeur,_),Carte(Coeur,_)) -> true
+	|	(Carte(Pique,_),Carte(Pique,_)) -> true
+	|	_ -> false;;
+
+let haut_egal c1 c2 = match (c1,c2) with
+		(Carte(_,Sept),Carte(_,Sept)) -> true
+	|	(Carte(_,Huit),Carte(_,Huit)) -> true
+	|	(Carte(_,Neuf),Carte(_,Neuf)) -> true
+	|	(Carte(_,Dix),Carte(_,Dix)) -> true
+	|	(Carte(_,Valet),Carte(_,Valet)) -> true
+	|	(Carte(_,Dame),Carte(_,Dame)) -> true
+	|	(Carte(_,Roi),Carte(_,Roi)) -> true
+	|	(Carte(_,As),Carte(_,As)) -> true
+	|	_ -> false;;
+
+
+let rec reduc = function
+		(x::r)::(y::s)::(z::t)::reste -> if (coul_egal x z || haut_egal x z)
+						then ((y::s)@(x::r))::(z::t)::reste
+						else (x::r)::(reduc ((y::s)::(z::t)::reste))
+	|	(x::r)::(y::s) -> (x::r)::(y::s);;
+
+let rec longueur l = match l with
+  	[] -> 0
+  |	x::r -> 1 + longueur r;;
+
+let rec reussite l = 
+	let l2 = reduc l
+	in if ((longueur l2)==(longueur l)) then l else reussite l2;;
+
+reussite (faitjeupaquets 32);;
+
+longueur (reussite (faitjeupaquets 32));;

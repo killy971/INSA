@@ -1,0 +1,9 @@
+<doc>
+<titre> Document </titre>
+<date> 1982 </date>
+<para>  ceci est ma premiere section, la voici 
+        <para> num, num </para>
+</para>
+<para>  ceci est ma deuxieme section. </para>
+</doc>
+

@@ -1,0 +1,13 @@
+/* classe GestionFigures
+	creation et destruction des figures utilisées par 
+	l'application MFC
+*/
+
+#include "stdafx.h"
+#include "GestionFigures.h"
+
+
+	
+
+
+

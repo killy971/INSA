@@ -1,0 +1,35 @@
+# Project: Project1
+# Makefile created by Dev-C++ 4.9.8.7
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = 
+OBJ  = princ.o service.o trinaif.o $(RES)
+LINKOBJ  = princ.o service.o trinaif.o $(RES)
+LIBS =  -L"d:/Dev-CppVPLUS/lib" -L"J:/tp1/" 
+INCS =  -I"d:/Dev-CppVPLUS/include"  -I"J:/tp1/" 
+CXXINCS =  -I"d:/Dev-CppVPLUS/include/c++"  -I"d:/Dev-CppVPLUS/include/c++/mingw32"  -I"d:/Dev-CppVPLUS/include/c++/backward"  -I"d:/Dev-CppVPLUS/include"  -I"J:/tp1/" 
+BIN  = tp1.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS = $(INCS) 
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before tp1.exe all-after
+
+
+clean: clean-custom
+	rm -f $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "tp1.exe" $(LIBS)
+
+princ.o: princ.c
+	$(CPP) -c princ.c -o princ.o $(CXXFLAGS)
+
+service.o: service.c
+	$(CPP) -c service.c -o service.o $(CXXFLAGS)
+
+trinaif.o: trinaif.c
+	$(CPP) -c trinaif.c -o trinaif.o $(CXXFLAGS)

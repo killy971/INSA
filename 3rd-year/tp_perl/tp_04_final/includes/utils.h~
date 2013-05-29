@@ -1,0 +1,18 @@
+namespace plop {
+/**
+ * La procédure every permet de faire rentrer en boucle événementielle
+ * un appel de procédure, avec temporisation.
+ * @param ms le délai entre chaque exécution de la procédure
+ * @param body la procédure à rappeler
+ */
+public void every (int ms,call body);
+
+/**
+ * La procédure max calcule le maximum de deux nombres.
+ * @param m1 le premier nombre à comparer
+ * @param m2 le deuxième nombre à comparer
+ * @return le plus grand des deux nombres
+ */
+public float max (float m1,float m2);
+
+}

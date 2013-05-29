@@ -1,0 +1,54 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: tp4 - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x40c /fo"d:\leplumey\visualc5\tp4\Release/tp4.res" /d "NDEBUG" /d "_AFXDLL" "G:\VISUALC5\tp4\tp4.rc"" 
+Creating temporary file "C:\TEMP\RSP7D.tmp" with contents
+[
+/nologo /MD /W3 /GX /O2 /I "..\cimagesV2\include" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /Fp"d:\leplumey\visualc5\tp4\Release/tp4.pch" /Yu"stdafx.h" /Fo"d:\leplumey\visualc5\tp4\Release/" /Fd"d:\leplumey\visualc5\tp4\Release/" /FD /c 
+"G:\VISUALC5\tp4\mainfrm.cpp"
+"G:\VISUALC5\tp4\tp4.cpp"
+"G:\VISUALC5\tp4\tp4doc.cpp"
+"G:\VISUALC5\tp4\tp4view.cpp"
+]
+Creating command line "cl.exe @C:\TEMP\RSP7D.tmp" 
+Creating temporary file "C:\TEMP\RSP7E.tmp" with contents
+[
+/nologo /MD /W3 /GX /O2 /I "..\cimagesV2\include" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /Fp"d:\leplumey\visualc5\tp4\Release/tp4.pch" /Yc"stdafx.h" /Fo"d:\leplumey\visualc5\tp4\Release/" /Fd"d:\leplumey\visualc5\tp4\Release/" /FD /c 
+"G:\VISUALC5\tp4\stdafx.cpp"
+]
+Creating command line "cl.exe @C:\TEMP\RSP7E.tmp" 
+Creating temporary file "C:\TEMP\RSP7F.tmp" with contents
+[
+d:\leplumey\visualc5\cimagesV2\release\cimagesV2.lib /nologo /subsystem:windows /incremental:no /pdb:"d:\leplumey\visualc5\tp4\Release/tp4.pdb" /machine:I386 /out:"d:\leplumey\visualc5\tp4\Release/tp4.exe" 
+d:\leplumey\visualc5\tp4\Release\mainfrm.obj
+d:\leplumey\visualc5\tp4\Release\stdafx.obj
+d:\leplumey\visualc5\tp4\Release\tp4.obj
+d:\leplumey\visualc5\tp4\Release\tp4doc.obj
+d:\leplumey\visualc5\tp4\Release\tp4view.obj
+d:\leplumey\visualc5\tp4\Release\tp4.res
+]
+Creating command line "link.exe @C:\TEMP\RSP7F.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+stdafx.cpp
+Compiling...
+mainfrm.cpp
+tp4.cpp
+tp4doc.cpp
+tp4view.cpp
+Generating Code...
+Linking...
+
+
+
+<h3>Results</h3>
+tp4.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

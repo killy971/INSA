@@ -1,0 +1,68 @@
+\documentclass[a4paper,11pt]{article}
+\setlength{\voffset} {-0.54cm}
+\setlength{\hoffset} {-0,04cm}
+\setlength{\textwidth} {14cm}
+\setlength{\textheight} {24cm}
+\setlength{\oddsidemargin} {1cm}
+\setlength{\evensidemargin} {1cm}
+\setlength{\marginparsep} {0cm}
+\setlength{\marginparwidth} {0cm}
+\setlength{\topmargin} {0cm}
+\setlength{\headheight} {0,45cm}
+\setlength{\headsep} {0,57cm}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage[dvips]{graphicx}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{latexsym}
+\title{Compte rendu TP Compilation \no 3\\Analyse syntaxique descendante}
+\author{NARGEOT Guillaume\\HOANG Thi Hong Hanh}
+\begin{document}
+
+\maketitle
+
+\section{Questions}
+
+\subsection{Pourquoi n'inclut-on pas les commentaires dans la grammaire d\'efinissant les constructions du langage ?}
+
+Les commentaire ne pr\'esentent aucun int\'er\^et pour l'analyse syntaxique,
+ainsi que pour l'analyse s\'emantique.
+Ainsi, il est inutile d'inclure des \'el\'ements dans la grammaire afin de traiter les commentaires.
+
+\subsection{Vous avez vu en cours que l'analyse syntaxique n\'ecessite un automate \`a pile (pour m\'emoriser le nombre de parenth\`eses 
+ouvrantes rencontr\'ees, par exemple). Comment se fait-il alors que l'on n'ait pas utilis\'e de pile dans l'impl\'ementation ?}
+Les fonctions \verb+analyse_mot+ et \verb+analyse_caractere+ \'etant r\'ecursives (mutuellement r\'ecusives), leurs appels aboutissent \`a empiler implicitement des valeurs dans l'interpreteur CAML. La pile est donc en quelque sorte cach\'ee, et nous n'avons pas \`a nous en pr\'eocuper lors de l'impl\'ementation.
+
+\subsection{Pourquoi utilise-t-on des grammaires \emph{LL(1)} ? Quel est l'int\'er\^et d'une grammaire \emph{LL(1)} ?}
+
+On utilise une grammaire \emph{LL(1)} car avec ce type de grammaire, il suffit de lire une seule unit\'e lexicale afin de savoir comment d\'eriver un non terminal. L'impl\'ementation en est par cons\'equent bien plus simple qu'une grammaire \emph{LL(k)} avec \emph{k} sup\'erieur \`a 1.
+De plus, pour d\'emontrer qu'une grammaire est \emph{LL(1)}, il suffit seulement de v\'erifier trois r\`egles simples.
+
+\subsection{Quel est l'int\'er\^et d'utiliser un arbre abstrait par rapport \`a un arbre concret ?}
+
+En utilisant un arbre abstrait, on se limite au strict minimum pour \'ecrire la structure d'un programme. Ainsi, pour l'analyse s\'emantique, les marqueurs syntaxiques seront des \'el\'ements inutiles, et c'est pourquoi on ne les inclue pas dans l'arbre abstrait.
+De plus, cela am\'eliore la lisibilit\'e de l'arbre correspondant au programme d'entr\'ee.
+
+\section{Grammaire}
+
+\subsection{Nouvelle grammaire}
+
+\begin{align}
+&<Expr>       & \longrightarrow & <Termb> <SuiteExpr> \\
+&<SuiteExpr>  & \longrightarrow & "ou" <Termb> <SuiteTermb> | \epsilon \\
+&<Termb>      & \longrightarrow & <Facteurb> <SuiteTermb>\\
+&<SuiteTermb> & \longrightarrow & "et" <Facteurb> <SuiteTermb> | \epsilon \\
+&<Facteurb>   & \longrightarrow & <Relation> | \\
+&             &                 & "(" <Expr> ")" |\\
+&             &                 & "si" <Expr> "alors" <Expr> "sinon" <Expr> "fsi" \\
+&<Relation>   & \longrightarrow & <Ident> <Op> <Ident> \\
+&<Op>         & \longrightarrow & "=" | "<>" | "<" | ">" | "<=" | ">="
+\end{align}
+
+\subsection{Preuve de la propri\'et\'e \emph{LL(1)}}
+
+
+\end{document}

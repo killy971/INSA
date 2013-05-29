@@ -1,0 +1,156 @@
+This is pdfTeX, Version 3.14159-1.10b (Web2C 7.4.5) (format=pdflatex 2005.6.28)  17 OCT 2005 18:08
+**tp_compil_01_rapport.tex
+(./tp_compil_01_rapport.tex{/usr/share/texmf/pdftex/config/pdftex.cfg}
+LaTeX2e <2001/06/01>
+Babel <v3.7h> and hyphenation patterns for american, french, german, ngerman, n
+ohyphenation, loaded.
+(/usr/share/texmf/tex/latex/base/article.cls
+Document Class: article 2001/04/21 v1.4e Standard LaTeX document class
+(/usr/share/texmf/tex/latex/base/size11.clo
+File: size11.clo 2001/04/21 v1.4e Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf/tex/latex/base/fontenc.sty
+Package: fontenc 2001/06/05 v1.94 Standard LaTeX package
+
+(/usr/share/texmf/tex/latex/base/t1enc.def
+File: t1enc.def 2001/06/05 v1.94 Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 38.
+))
+(/usr/share/texmf/tex/generic/babel/babel.sty
+Package: babel 2001/03/01 v3.7h The Babel package
+
+(/usr/share/texmf/tex/generic/babel/frenchb.ldf
+Language: french 2001/09/09 v1.5g French support from the babel system
+
+(/usr/share/texmf/tex/generic/babel/babel.def
+File: babel.def 2001/03/01 v3.7h Babel common definitions
+\babel@savecnt=\count87
+\U@D=\dimen103
+)
+Package babel Info: Making : an active character on input line 199.
+Package babel Info: Making ; an active character on input line 200.
+Package babel Info: Making ! an active character on input line 201.
+Package babel Info: Making ? an active character on input line 202.
+
+*************************************
+* Local config file frenchb.cfg used
+*
+(/usr/share/texmf/tex/generic/babel/frenchb.cfg)))
+(/usr/share/texmf/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texmf/tex/latex/graphics/graphics.sty
+Package: graphics 2001/07/07 v1.0n Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2001/08/31 v1.1 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: dvips.def on input line 80.
+
+(/usr/share/texmf/tex/latex/graphics/dvips.def
+File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))
+\Gin@req@height=\dimen104
+\Gin@req@width=\dimen105
+)
+(/usr/share/texmf/tex/latex/base/latexsym.sty
+Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
+\symlasy=\mathgroup4
+LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
+(Font)                  U/lasy/m/n --> U/lasy/b/n on input line 42.
+) (./tp_compil_01_rapport.aux)
+\openout1 = `tp_compil_01_rapport.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT2/wncyr/m/n on input line 19.
+LaTeX Font Info:    Try loading font information for OT2+wncyr on input line 19
+.
+
+(/usr/share/texmf/tex/latex/cyrillic/ot2wncyr.fd
+File: ot2wncyr.fd 1999/12/17 v3.2a Computer Modern Cyrillic font definitions
+)
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Info: Redefining \dots on input line 19.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <17.28> on input line 21.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 21.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 21.
+
+(/usr/share/texmf/tex/latex/base/ulasy.fd
+File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 21.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 21.
+ (./tp_compil_01_rapport.toc)
+\tf@toc=\write3
+\openout3 = `tp_compil_01_rapport.toc'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 43--47
+
+ []
+
+[1
+
+{/usr/share/texmf/dvips/config/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 59--101
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 102--110
+
+ []
+
+[2] [3] (./tp_compil_01_rapport.aux) ) 
+Here is how much of TeX's memory you used:
+ 1318 strings out of 95437
+ 14790 string characters out of 1190233
+ 64443 words of memory out of 1000001
+ 4330 multiletter control sequences out of 10000+50000
+ 14911 words of font info for 41 fonts, out of 500000 for 1000
+ 14 hyphenation exceptions out of 1000
+ 25i,6n,24p,218b,226s stack positions out of 1500i,500n,5000p,200000b,5000s
+ 18 PDF objects out of 300000
+ 0 named destinations out of 131072
+ 0 words of extra memory for PDF output out of 65536
+ </var/lib/texmf/pk/ljfour/jknappen/ec/ec
+bi1200.600pk> </var/lib/texmf/pk/ljfour/jknappen/ec/ecbx1200.600pk> </var/lib/t
+exmf/pk/ljfour/jknappen/ec/ecti1095.600pk> </var/lib/texmf/pk/ljfour/jknappen/e
+c/ecrm1095.600pk> </var/lib/texmf/pk/ljfour/jknappen/ec/ecbx1095.600pk> </var/l
+ib/texmf/pk/ljfour/jknappen/ec/ecbx1440.600pk> </var/lib/texmf/pk/ljfour/jknapp
+en/ec/ecrm1200.600pk> </var/lib/texmf/pk/ljfour/jknappen/ec/ecrm1728.600pk>
+Output written on tp_compil_01_rapport.pdf (3 pages, 86750 bytes).

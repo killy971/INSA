@@ -1,0 +1,37 @@
+e1:
+Antoine Doisnel : 0
+Roland Louis : 0
+Bob Marley : 0
+George Bush : 0
+Fran?ois-Julien Bourget Marbaud : 0
+Pierre Dubois : 0
+e1:
+Antoine Doisnel : 0
+Bob Marley : 0
+Fran?ois-Julien Bourget Marbaud : 0
+e1:
+Antoine Doisnel : 0
+Bob Marley : 0
+Fran?ois-Julien Bourget Marbaud : 0
+e2:
+Roland Louis : 0
+George Bush : 0
+Pierre Dubois : 0
+e3:
+Antoine Doisnel : 0
+Bob Marley : 0
+Fran?ois-Julien Bourget Marbaud : 0
+e4:
+Antoine Doisnel : 0
+Fran?ois-Julien Bourget Marbaud : 0
+e4 inclus dans e1 ? true
+e1 = e3 ? true
+e1 et e2 disjoints ? true
+intersection de e1 et e2: 
+union de e1 et e2: 
+Antoine Doisnel : 0
+Bob Marley : 0
+Fran?ois-Julien Bourget Marbaud : 0
+Roland Louis : 0
+George Bush : 0
+Pierre Dubois : 0

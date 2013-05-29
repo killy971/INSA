@@ -1,0 +1,8 @@
+C:\killy-kun\学校\インサ\三年\Compilation\tp_04\tp_04_expr\src\Evaluation.java
+C:\killy-kun\学校\インサ\三年\Compilation\tp_04\tp_04_expr\src\Expr.java
+C:\killy-kun\学校\インサ\三年\Compilation\tp_04\tp_04_expr\src\ExprConstants.java
+C:\killy-kun\学校\インサ\三年\Compilation\tp_04\tp_04_expr\src\ExprTokenManager.java
+C:\killy-kun\学校\インサ\三年\Compilation\tp_04\tp_04_expr\src\ParseException.java
+C:\killy-kun\学校\インサ\三年\Compilation\tp_04\tp_04_expr\src\SimpleCharStream.java
+C:\killy-kun\学校\インサ\三年\Compilation\tp_04\tp_04_expr\src\Token.java
+C:\killy-kun\学校\インサ\三年\Compilation\tp_04\tp_04_expr\src\TokenMgrError.java

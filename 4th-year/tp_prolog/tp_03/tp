@@ -1,0 +1,76 @@
+
+/* donne la longueur d'une liste */
+lg([],0).
+lg([_|R],N) :- lg(R,X), is(N,X+1).
+
+/* crée une liste de longueur N*/
+lg2([],0).
+lg2([_|R],N) :- >(N,0), is(N1,N-1), lg2(R,N1).
+
+/* construction d'une liste de lg 2*N */
+faitdbliste([],0).
+faitdbliste([_|R],N) :- >(N,0),  is(N1,N-1), faitdbliste(R,N1).
+
+/* Concaténation de 3 listes */
+conc3([],[],L3,L3).
+conc3([],[B|S],L3,[B|T]) :- conc3([],S,L3,T).
+conc3([A|R],L2,L3,[A|U]) :- conc3(R,L2,L3,U).
+
+/* prédicat pour dire si un element appartient a une liste */
+membre(A,[A|R]).
+membre(A,[B|R]) :- \=(A,B), membre(A,R).
+
+/* prédicat membre qui énumère */
+membre(A,[A|R]).
+membre(A,[B|R]) :-  membre(A,R).
+
+/* miroir d'une liste */
+miroir([],[]).
+miroir([A|R],L) :- append(X,[A],L), miroir(R,X).
+
+/* liste palindrome */
+palindrome([]).
+palindrome([A|[]]).
+palindrome([A|R]) :- append(X,[A],R), palindrome(X).
+
+
+/* A n'est pas dans L */
+horsde(_,[]).
+horsde(A,[P|S]) :- \=(A,P), horsde(A,S).
+
+/* Les elements de la liste sont tous différents */ 
+tousdiff([]).
+tousdiff([A|S]) :- horsde(A,S), tousdiff(S).
+
+
+/* La liste X commence par Y */
+debpar(X,Y) :- append(Y,_,X).
+
+/* La liste X finit par Y */
+finpar(X,Y) :- append(_,Y,X).
+
+/* la liste Y est sous-liste de la liste */
+sousliste(X,Y) :- debpar(X,Y).
+sousliste(X,Y) :- finpar(X,Y).
+sousliste(X,Y) :- append(_,Y,Z), append(Z,_,X).
+
+
+/* elimination des doublons */
+elim([],[]).
+elim([X|Y],[X|B]) :- horsde(X,Y), elim(Y,B).
+elim([X|Y],L) :- membre(X,Y),elim(Y,L).
+
+/* sous ensemble */
+sousensemble([],_).
+sousensemble([A|R],L) :- membre(A,L), sousensemble(R,L).
+
+/* non inclus */
+noninclus([A|[]],L):- horsde(A,L).
+noninclus([A|R],L):- horsde(A,L).
+noninclus([A|R],L):- noninclus(R,L).
+
+/* union */
+
+union(A,B,Z)
+
+

@@ -1,0 +1,38 @@
+(* TP n‹5 - Les intervalles *)
+
+(* Quelques fonctions sur les intervalles *)
+
+(* let dans e intervalle = match intervalle with (binf,bsup) -> (e>=binf)&&(e<=bsup);; *)
+let dans e (binf,bsup) = (e>=binf)&&(e<=bsup);;
+
+(* let disjoint i1 i2 = match (i1,i2) with ((binf1,bsup1),(binf2,bsup2)) -> (bsup1<binf2);; *)
+let disjoint (binf1,bsup1) (binf2,bsup2) = (bsup1<binf2);;
+
+(* let recouvre i1 i2 = match (i1,i2) with ((binf1,bsup1),(binf2,bsup2)) -> (min binf1 binf2,max bsup1 bsup2);; *)
+let recouvre (binf1,bsup1) (binf2,bsup2) = (min binf1 binf2,max bsup1 bsup2);;
+
+
+(* Fonctions recursives sur les listes d'intervalles *)
+
+let rec enveloppe l = match l with
+  	[] -> raise (Failure "erreur: liste vide")
+  |	x::[] -> x
+  |	x::r -> recouvre x (enveloppe r);;
+
+let rec liste_ent (binf,bsup) = if (binf<bsup) then binf::(liste_ent (binf+1,bsup)) else binf::[];;
+
+(* 
+let rec endehors l =
+	match l with
+  	[] -> 
+  	x::[] -> if (dans x 
+  	x::r -> ;;
+
+
+let rec endehors l =
+	let rec endehors_aux l1 l2 = match l2 with
+  	[] -> []
+  	x::[] -> if (dans x l1) then else 
+  	x::r -> 
+	in endehors_aux l (liste_ent (enveloppe l));;
+*)	

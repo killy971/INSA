@@ -1,0 +1,41 @@
+
+
+Cette personne est d?j? dans la liste
+Annuaire 1:
+Fran?ois-Julien Bourget Marbaud : 0
+Antoine Doisnel : 0
+Roland Louis : 590812915
+Steeve Louis : 0
+Bob Marley : 0
+
+Annuaire 2:
+George Bush : 0
+Antoine Doisnel : 0
+Pierre Dubois : 0
+Roland Louis : 590812915
+Steeve Louis : 0
+
+Roland Louis : 590812915
+Le numero n'a pas ete trouve
+null
+Annuaires 1 et 2 ?gaux ?
+false
+Intersection annuaires 1 et 2:
+
+Antoine Doisnel : 0
+Roland Louis : 590812915
+Steeve Louis : 0
+
+Union annuaires 1 et 2:
+Cette personne est d?j? dans la liste
+Cette personne est d?j? dans la liste
+Cette personne est d?j? dans la liste
+
+Fran?ois-Julien Bourget Marbaud : 0
+George Bush : 0
+Antoine Doisnel : 0
+Pierre Dubois : 0
+Roland Louis : 590812915
+Steeve Louis : 0
+Bob Marley : 0
+

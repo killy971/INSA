@@ -1,0 +1,151 @@
+\documentclass[a4paper,11pt]{article}
+\setlength{\voffset} {-0.54cm}
+\setlength{\hoffset} {-0,04cm}
+\setlength{\textwidth} {14cm}
+\setlength{\textheight} {24cm}
+\setlength{\oddsidemargin} {1cm}
+\setlength{\evensidemargin} {1cm}
+\setlength{\marginparsep} {0cm}
+\setlength{\marginparwidth} {0cm}
+\setlength{\topmargin} {0cm}
+\setlength{\headheight} {0,45cm}
+\setlength{\headsep} {0,57cm}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage[dvips]{graphicx}
+\usepackage{latexsym}
+\title{Compte rendu TP Compilation \no 1\\Analyse lexicale et crible}
+\author{Nargeot Guillaume\\Angelique Lain\'e}
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+%\newpage
+
+\section{Explication du code}
+\noindent
+Fonction \emph{fct\_transition} : la fonction de transition de l'automate
+\begin{itemize}
+    \item 2 paramètres en entrée : l'état courant et le caractère lu
+    \item retourne l'\'etat suivant dans l'automate apr\`es la transition
+\end{itemize}
+\noindent
+\\
+Fonction \emph{get\_token} : représente le scanner incrémental qui rend
+un lexème à la demande
+\begin{itemize}
+    \item 2 paramètres en entrée : la description de l'automate (représenté
+    par l'état de départ, la fonction de transition et la liste des états
+    finaux) et le flot à analyser
+    \item retourne un couple (unité lexicale, lexème) à la fois
+\end{itemize}
+Cette fonction fait appel à la fonction \emph{get\_token\_aux}.\\
+\noindent
+\\
+Fonction \emph{get\_token\_aux} :
+\begin{itemize}
+    \item 3 paramètres en entrée : la description de l'automate, (représenté
+    par l'état de départ, la fonction de transition et la liste des
+    états finaux), le lexème que l'on construit et le flot à analyser
+    \item retourne le lexème détecté
+\end{itemize}
+
+\newpage
+% L'algorithme. Les trucs pour la mise en page sont assez miserables
+% mais faut avouer que j'ai pas trouver mieux ou plus clean :/
+
+\subsubsection*{Algorithme de la fonction}
+\noindent
+On prend le caractère courant du flot\\
+Si on est pas à la fin du flot\\
+alors\\
+\hspace*{1cm}on fait appel à la fonction de transition.\\
+%
+\hspace*{1cm}si la fonction de transition retourne l'etat final E3\\
+\hspace*{1cm}alors\\
+%
+\hspace*{1cm}\hspace*{1cm}\emph{(le dernier caractère lu ne doit pas être consommé)}\\
+\hspace*{1cm}\hspace*{1cm}on retourne le lexème trouvé\\
+%
+\hspace*{1cm}sinon\\
+%
+\hspace*{1cm}\hspace*{1cm}si la fonction de transition retourne l'état initial\\
+%
+\hspace*{1cm}\hspace*{1cm}alors\\
+%
+\hspace*{1cm}\hspace*{1cm}\hspace*{1cm}\emph{(cas o\`u on a lu des commentaires, un espace, une tabulation\\
+\hspace*{1cm}\hspace*{1cm}\hspace*{1cm}ou un retour à la ligne)}\\
+\hspace*{1cm}\hspace*{1cm}\hspace*{1cm}on consomme le caractère lu.\\
+\hspace*{1cm}\hspace*{1cm}\hspace*{1cm}on relance la recherche d'un lexème sans tenir compte du\\
+\hspace*{1cm}\hspace*{1cm}\hspace*{1cm}commentaire ou espace ou tabulation ou retour à la ligne trouvé.\\
+%
+\hspace*{1cm}\hspace*{1cm}sinon\\
+%
+\hspace*{1cm}\hspace*{1cm}\hspace*{1cm}si la fonction de transition retourne l'état final E8\\
+%
+\hspace*{1cm}\hspace*{1cm}\hspace*{1cm}alors\\
+%
+\hspace*{1cm}\hspace*{1cm}\hspace*{1cm}\hspace*{1cm}\emph{(le dernier caractère lu doit être consommé)}\\
+\hspace*{1cm}\hspace*{1cm}\hspace*{1cm}\hspace*{1cm}on consomme le caractère lu.\\
+\hspace*{1cm}\hspace*{1cm}\hspace*{1cm}\hspace*{1cm}on retourne le lexème trouvé.\\
+%
+\hspace*{1cm}\hspace*{1cm}\hspace*{1cm}sinon\\
+%
+\hspace*{1cm}\hspace*{1cm}\hspace*{1cm}\hspace*{1cm}on continue récursivement la recherche du lexème.\\
+%
+sinon\\
+%
+\hspace*{1cm}\emph{(on est à la fin du flot)}\\
+\hspace*{1cm}on retourne le lexème trouvé.\\
+
+\noindent
+La valeur \emph{unite\_lex} correspond au résultat du crible : on compare le
+lexème trouvé avec les chaînes connues pour retourner le bon couple
+(unité lexicale, lexème).\\
+\noindent
+\\
+Fonction \emph{scanner} : retourne la liste des lexèmes g\'en\'er\'es \`a partir
+du flot d'entr\'ee
+\begin{itemize}
+    \item 2 paramètres en entrée : la description de l'automate (représenté par
+    l'état de départ, la fonction de transition et la liste des états finaux) et le flot à analyser
+    \item retourne la liste des couples (unit\'e\ lexicale, lexème)
+\end{itemize}
+
+\section{Questions}
+
+\subsection*{Quel est l'intérêt d'avoir un crible séparé dans l'analyseur lexical?}
+
+Séparer le crible dans l'analyseur lexical permet d'avoir un analyseur lexical plus générique.
+La sous-fonction effectuant crible ---~\emph{unit\_lex}~--- pourra être changée ou modifiée
+simplement puisque toutes les unités lexicales sont réunies au sein de la même sous-fonction.
+La maintenance de cet analyseur lexical en est donc facilitée.
+
+\subsection*{Quels sont les intérêts d'utiliser les types énumérés de CAML?}
+
+L'utilisation de types énumérés en CAML permet de précisément définir les types
+des paramètres utilisés. Cela permet d'être plus explicite dans les valeurs
+retournées et d'éviter les erreurs de typage. Le code est plus optimisé,
+plus performant.
+
+\subsection*{Quel est l'intérêt d'un scanner incrémental qui rend un lexème
+à la demande (fonction \emph{get\_token}), par rapport à un scanner qui rend la liste
+des lexèmes du programme?}
+
+L'intérêt de faire un scanner ne rendant qu'un lexème à la fois permet de
+simplifier l'implémentation de l'analyseur lexical. Le scanner rendant la
+liste des unités lexicales est développé en faisant appel autant de fois que
+nécessaire au scanner incrémental. De plus, la gestion et la récupération des
+erreurs en est simplifiée.
+
+\subsection*{Pourquoi ident est-il considéré comme un terminal et non pas un non-terminal?}
+
+Si Ident était considéré comme un non-terminal, cela signifierait qu'il posséderait un sens sémantique autre qu'identificateur. 
+Or ici, nous devons le détecter comme une unité lexicale, c'est pourquoi Ident est un terminal.
+
+
+
+\section{Le diagramme de transition}
+
+\end{document}

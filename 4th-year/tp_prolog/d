@@ -1,0 +1,12 @@
+:- nodbgcomp.
+
+analex(Llex,Lulex) :- read_token(X,T), traite_token(X,T,Llex,Lulex).
+traite_token(X,T,[X|R1],[T|R2]) :- X\='.', analex(R1,R2).
+traite_token('.',_,[],[]).
+
+axiome --> ["("], matrice, [")"].
+matrice --> ["("], ligne, [")"], ["("], ligne, [")"], matrice.
+matrice --> [].
+ligne --> pixel, pixel, ligne.
+ligne --> [].
+pixel --> [P], {P=0; P=1}.
