@@ -1,9 +1,0 @@
-Roland Louis : 590812915
-R. L.
-R. Louis
-Roland Louis
-
-p2=p7 ?true
-false
-true
-false

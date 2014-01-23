@@ -1,7 +1,0 @@
-LouisVI : Adelaide(LouisVII,RobertIerDreux,Constance,Pierre);
-LouisVII : Adele(Agnes, PhilippeII);
-Pierre:Elisabeth(PierreII);
-PhilippeII : Isabelle(LouisVIII);
-LouisVIII : Blanche(LouisIX,RobertIerArtois,CharlesIer);
-LouisIX :Marguerite(Robert,PhilippeIII).#
-
